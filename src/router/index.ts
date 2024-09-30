@@ -1,12 +1,16 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/home/Home.vue";
+import PokedexList from "../views/Pokedex/PokedexList.vue";
 
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    redirect: "/pokedex",
+  },
+  {
+    path: "/pokedex",
+    name: "PokedexList",
+    component: PokedexList,
   },
 ];
 
