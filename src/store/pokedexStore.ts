@@ -11,7 +11,7 @@ export const usePokedexStore = defineStore('myStore', {
     previous: null,
     next: null,
     limit: 100,
-    offset: 1200
+    offset: 0
   }),
   actions: {
     async getPokemons(url: string | null) {
@@ -19,6 +19,10 @@ export const usePokedexStore = defineStore('myStore', {
       const match = url.match(/offset=(\d+)/);
       this.offset = match ? parseInt(match[1]) : 0;
 
+      if (this.offset + this.limit >= this.count) {
+        this.limit = 100; 
+        url = `${this.baseUrl}/pokemon?limit=${this.limit}&offset=${this.offset}`;
+      }
 
       const extractNumberFromURL = (url: string) => {
         const regex = /\/(\d+)\//; 
@@ -30,7 +34,6 @@ export const usePokedexStore = defineStore('myStore', {
         this.loading = true;
         const response = await axios.get(url);
         const data = response.data;
-        console.log(data);
         let pokemons = data.results;
         
         this.count = data.count;
@@ -45,6 +48,7 @@ export const usePokedexStore = defineStore('myStore', {
         console.log(error);
       } finally {
         this.loading = false;
+        
       }
     },
 }});
