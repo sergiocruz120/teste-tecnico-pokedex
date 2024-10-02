@@ -43,11 +43,11 @@ const paginationRange = computed(() => {
     <h1>PokéList</h1>
   </Card>
 
-  <Card>
+  <Card class="card-pokemons">
     <div class="pokemons">
       <!-- Itera sobre os Pokémons e exibe o componente Pokedex -->
       <div v-for="(pokemon, index) in pokemonData.pokemons" :key="index">
-        <Pokedex :data="pokemon" :id="index + 1" />
+        <Pokedex :data="pokemon" />
       </div>
     </div>
 
@@ -85,8 +85,6 @@ const paginationRange = computed(() => {
   display: flex;
   justify-content: center;
   font-family: "Pokemon Solid", sans-serif;
-  font-size: 36px;
-  color: #4a90e2;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   background: linear-gradient(90deg, #ffcb05, #ff4b2b);
   -webkit-background-clip: text;
@@ -94,10 +92,9 @@ const paginationRange = computed(() => {
   -webkit-text-fill-color: transparent;
   padding: 10px 20px;
   border-radius: 10px;
-  text-align: center;
-  margin: 20px 0;
   border: 2px solid #4a90e2;
-  transition: transform 0.3s ease;
+  background-color: white;
+  
 }
 
 .pokemons {
@@ -105,5 +102,12 @@ const paginationRange = computed(() => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+}
+
+.card-pokemons {
+  border: 2px solid #4a90e2;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px 0;
 }
 </style>
