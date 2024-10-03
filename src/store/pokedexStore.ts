@@ -5,6 +5,7 @@ import axios from 'axios';
 export const usePokedexStore = defineStore('myStore', {
   state: (): IPokemonState => ({
     pokemons: [],
+    pokemon: null,
     loading: false,
     baseUrl: 'https://pokeapi.co/api/v2',
     count: 0,
@@ -14,6 +15,15 @@ export const usePokedexStore = defineStore('myStore', {
     offset: 0
   }),
   actions: {
+    async getPokemon(id: number) {
+      try {
+        const response = await axios.get(`${this.baseUrl}/pokemon/${id}`);
+        this.pokemon = response.data;
+        // console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async getPokemons(url: string | null) {
       url = url || `${this.baseUrl}/pokemon?limit=${this.limit}&offset=${this.offset}`;
       const match = url.match(/offset=(\d+)/);
